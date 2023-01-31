@@ -3,6 +3,7 @@ import { SpaceShape } from './types'
 import { rndf, rndi } from './math'
 import { maxRandomDefaultSpaceObjectVelocity as maxVel } from './constants'
 import type { Button90Config } from '../components/interface'
+import { getScreenCenterPosition, getScreenRect } from './canvas_util'
 
 export function createSpaceObject(name = 'SpaceObject'): SpaceObject {
   const initVel: Vec2d = { x: rndf(-maxVel, maxVel), y: rndf(-maxVel, maxVel) }
@@ -56,9 +57,27 @@ export function createSpaceObject(name = 'SpaceObject'): SpaceObject {
     inverseFireRate: 6,
     shotsPerFrame: 1,
     photonColor: '#0f0',
+    deadFrameCount: 0,
+    dontRenderMe: false,
   }
 
   return spaceObject
+}
+
+export function defaultPlayerSpaceObject(ctx: CanvasRenderingContext2D): SpaceObject {
+  const so: SpaceObject = createSpaceObject()
+  const offset = getScreenRect(ctx)
+  so.position = add(getScreenCenterPosition(ctx), rndfVec2d(-offset, offset))
+  so.mass = 0.1
+  so.angleDegree = -120
+  so.health = 50
+  so.steeringPower = 0.55
+  so.enginePower = 0.025
+  so.name = `P-${rndi(0, 900000)}`
+  so.color = randomAnyColor()
+  so.photonColor = '#f0f'
+  so.isLocal = true
+  return so
 }
 
 export function createButton90Config(
@@ -74,3 +93,15 @@ export function createButton90Config(
     selected: selected,
   }
 }
+function add(arg0: Vec2d, arg1: any): Vec2d {
+  throw new Error('Function not implemented.')
+}
+
+function rndfVec2d(arg0: number, offset: any): any {
+  throw new Error('Function not implemented.')
+}
+
+function randomAnyColor(): string {
+  throw new Error('Function not implemented.')
+}
+

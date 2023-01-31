@@ -143,6 +143,16 @@ export function decayDeadSpaceObjects(so: Damageable[]): Damageable[] {
   return out
 }
 
+export function handleDeath(so: SpaceObject): void {
+  const maxDeadFrameCount = 100
+  if (so.health <= 0) {
+    so.deadFrameCount++
+  }
+  if (so.deadFrameCount > maxDeadFrameCount) {
+    so.dontRenderMe = true
+  }
+}
+
 export function bounceSpaceObject(so: Physical & Damager & Bounceable, screen: Vec2d, energyFactor = 1, gap = 1, damageDeltaFactor: number) {
   if (so.position.x < gap) {
     so.velocity.x = -so.velocity.x * energyFactor

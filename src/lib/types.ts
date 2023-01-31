@@ -114,6 +114,8 @@ export interface Damager extends Positionable {
 
 export interface Damageable extends Positionable {
   health: number
+  deadFrameCount: number
+  dontRenderMe: boolean
 }
 
 export interface SpaceObject
@@ -136,6 +138,12 @@ export interface SpaceObject
   shotsInFlight: SpaceObject[]
   collidingWith: SpaceObject[]
 }
+
+// export class User {
+//   private readonly id: string
+
+
+// }
 
 // export function applySteer(o: Steerable, deltaTime: number): void {
 //   o.angleDegree += o.steeringPower

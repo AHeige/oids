@@ -82,6 +82,7 @@ export function sendSpaceObjectToBroadcastServer(so: SpaceObject): void {
   // Remove array which could containg circular ref
   so.collidingWith = []
   so.isLocal = false
+  so.dontRenderMe = false
   sendToServer(so)
 }
 

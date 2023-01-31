@@ -27,7 +27,6 @@
   }
 
   let game: Game
-  
 
   // let localPlayer: SpaceObject
 
